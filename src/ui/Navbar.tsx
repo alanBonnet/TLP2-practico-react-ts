@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext'
 
 interface Props {
     
 }
 
 export const Navbar = (props: Props) => {
+    const {user, setUser} = useContext(AuthContext)
     return (
         <nav className='navbar navbar-expand-lg bg-dark navbar-dark px-3'>
             <div className='container-fluid'>
@@ -18,12 +20,29 @@ export const Navbar = (props: Props) => {
                         <li className='nav-item'>
                             <a className='nav-link active' aria-current='page' href='#'>Home</a>
                         </li>
-                        <li className='nav-item'>
-                            <NavLink className='nav-link' to='/login'>Iniciar Sesión</NavLink>
-                        </li>
-                        <li className='nav-item'>
-                            <NavLink className='nav-link' to='/register'>Registrarse</NavLink>
-                        </li>
+                        {!user.isLogged && (
+                            <>
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link' to='/login'>Iniciar Sesión</NavLink>
+                                </li>
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link' to='/register'>Registrarse</NavLink>
+                                </li>
+                            </>
+                        )}
+                        {user.isLogged && (
+                            <>
+                                <li className="nav-item">
+                                    <button className="nav-link btn" onClick={()=>{setUser({
+                                                isLogged:false
+                                            })
+                                        }
+                                    }>
+                                        <NavLink className="nav-link py-0"  to="/login">Cerrar Sesión</NavLink>
+                                    </button>
+                                </li>
+                            </>
+                        )}
                         {/* <li className='nav-item dropdown'>
                             <a className='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                                 Dropdown
