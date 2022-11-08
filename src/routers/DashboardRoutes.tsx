@@ -13,8 +13,8 @@ export const DashboardRoutes = (props: Props) => {
         <>
             <Navbar/>
             <Routes>
+                <Route path="/register" element={<Register/>}/>
                 <Route path="/login" element={<Login/>}/>
-                <Route index path="/register" element={<Register/>}/>
             </Routes>
         </>
     )

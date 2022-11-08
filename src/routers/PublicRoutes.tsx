@@ -14,6 +14,6 @@ export const PublicRoutes:FC<Props> = ({children}) => {
     }
 
     return user.isLogged
-        ? <Navigate to='/home' />
+        ? <Navigate to='/user' />
         : children
 }
