@@ -1,10 +1,5 @@
-import React from 'react'
+import React, { createContext } from 'react'
 
-type Props = {}
 
-export const TaskContext = (props: Props) => {
-  return (
-    <div>TaskContext</div>
-  )
-}
+export const TaskContext = createContext<any>({})
 

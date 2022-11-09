@@ -7,7 +7,7 @@ interface Props {
 
 export const PublicRoutes:FC<Props> = ({children}) => {
     const { user } = useContext(AuthContext)
-    if(user.logged){
+    if(user.isLogged){
         console.log("está logeado")
     }else{
         console.log("no está log")

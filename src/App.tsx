@@ -8,18 +8,11 @@ function App() {
         isLogged:false,
         username:"Ejemplo"
     })
-    const tasks = [
-        {
-            id: 1,
-            title: "Completar prácticos",
-            descripction: "Completar el práctico de useContext"
-        }
-    ];
+    
     return (
         <AuthContext.Provider value={{
             user,
-            setUser,
-            tasks
+            setUser
         }}>
             <AppRouter/>
         </AuthContext.Provider>

@@ -10,5 +10,5 @@ export const PrivateRoutes:FC<Props> = ({children}) => {
     const { user } = useContext(AuthContext)
     return user.isLogged
             ? children
-            : <Navigate to="/register"/>
+            : <Navigate to="/login"/>
 }
