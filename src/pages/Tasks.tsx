@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext'
 import { TaskContext } from '../context/TaskContext'
@@ -18,19 +18,21 @@ export const Tasks = (props: Props) => {
     const { user } = useContext(AuthContext)
     const [error, setError] = useState("");
  
-    setInterval(async() =>{
-        try {
-            const getTaskArray = await CtrlTask.getTasks(user);
-            setTasks(getTaskArray.Tasks)
-        } catch (error) {
-            setError("error con traer tareas")
-            setTimeout(() => {
-                setError("")
-            }, 3000)
-        }
-    },6000);
 
-
+    //Traer tareas
+    const getTaskPrint = () =>{
+        (async() =>{
+            try {
+                const getTaskArray = await CtrlTask.getTasks(user);
+                setTasks(getTaskArray.Tasks)
+            } catch (error) {
+                setError("error con traer tareas")
+                setTimeout(() => {
+                    setError("")
+                }, 3000)
+            }
+        })()
+    }
     //crear tarea
     const [titleTask,setTitleTask] = useState("")
     const [descriptionTask,setDescriptionTask] = useState("")
@@ -63,9 +65,15 @@ export const Tasks = (props: Props) => {
         <>
             <div className='container my-5 bg-light bg-opacity-25 p-5 rounded'>
                 
-                <div className="botonera bg-light bg-opacity-50 rounded py-2 mb-3">
+                <div className="bg-light bg-opacity-50 rounded py-2 mb-3 row">
                 {/* <!-- Button trigger modal --> */}
-                    <button type="button" className="btn btn-success mx-auto d-block mb-2 border border-dark border-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button 
+                        className="btn btn-primary border border-dark border-2 mx-auto mb-2 col offset-1"
+                        onClick={getTaskPrint}
+                        >
+                            TraerTareas
+                        </button>
+                    <button type="button" className="btn btn-success mx-auto mb-2 border border-dark border-2 col offset-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i className="bi bi-plus-circle fw-bold fs-4"></i>
                     </button>
                 </div>
