@@ -54,8 +54,8 @@ export const Tasks = (props: Props) => {
                 if(!fetching.ok){
                     return "No se pudo crear la tarea"
                 }
-                console.log(fetching)
-                return "asd"
+                getTaskPrint()
+                return "tarea creada"
             } catch (error) {
                 return ('no se pudo conectar con el servidor');
             }
@@ -65,15 +65,16 @@ export const Tasks = (props: Props) => {
         <>
             <div className='container my-5 bg-light bg-opacity-25 p-5 rounded'>
                 
-                <div className="bg-light bg-opacity-50 rounded py-2 mb-3 row">
+                <div className="bg-light bg-opacity-50 rounded px-5 py-2 mb-3 row">
                 {/* <!-- Button trigger modal --> */}
                     <button 
                         className="btn btn-primary border border-dark border-2 mx-auto mb-2 col offset-1"
                         onClick={getTaskPrint}
                         >
                             TraerTareas
-                        </button>
-                    <button type="button" className="btn btn-success mx-auto mb-2 border border-dark border-2 col offset-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    </button>
+                    <div className="col"></div>
+                    <button type="button" className="btn btn-success mx-auto mb-2 border border-dark border-2 col " data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <i className="bi bi-plus-circle fw-bold fs-4"></i>
                     </button>
                 </div>
@@ -87,6 +88,13 @@ export const Tasks = (props: Props) => {
                                 <div className="card-body">
                                     <h5 className="card-title">{task.title}</h5>
                                     <p className="card-text"> {task.description} </p>
+                                    <blockquote className="blockquote mb-0 text-end">
+                                        {task.estado == 1 && <p className='text-danger '>Pendiente</p>}
+                                        {task.estado == 2 && <p className='text-warning '>En Proceso</p>}
+                                        {task.estado == 3 && <p className='text-success '>Completado</p>}
+                                        <footer className="blockquote-footer"> {(task.fecha)} </footer>
+                                    </blockquote>
+
                                     {/* <a href="#" className="btn btn-primary">Go somewhere</a> */}
                                 </div>
                                 </div>
